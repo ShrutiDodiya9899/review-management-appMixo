@@ -330,7 +330,7 @@ export default function App() {
                           <Edit />
                         </IconButton>
 
-                        <Button
+                        {/* <Button
                           color="success"
                           variant="contained"
                           startIcon={<CheckCircle />}
@@ -346,7 +346,35 @@ export default function App() {
                           onClick={() => handleOpenDialog(review, "reject")}
                         >
                           Reject
-                        </Button>
+                        </Button> */}
+
+                        {review.status == "pending" ? (
+  <>
+    <Button
+      color="success"
+      variant="contained"
+      startIcon={<CheckCircle />}
+      onClick={() => handleApprove(review._id)}
+    >
+      Approve
+    </Button>
+
+    <Button
+      color="error"
+      variant="contained"
+      startIcon={<Cancel />}
+      onClick={() => handleOpenDialog(review, "reject")}
+    >
+      Reject
+    </Button>
+  </>
+) : (
+  <Chip
+    label={review.status?.toUpperCase()}
+    color={review.status == "approved" ? "success" : "error"}
+    sx={{ fontWeight: 600 }}
+  />
+)}
                       </Stack>
                     </TableCell>
                   </TableRow>
